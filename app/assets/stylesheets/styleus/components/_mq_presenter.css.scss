@@ -37,6 +37,7 @@ $third_col_width: $styleguide_width - $second_col_width - $first_col_width - 2*$
     position: fixed;
     background: #fff;
     border-bottom: 1px solid #ccc;
+    width: $styleguide_width;
   }
 
   .__mq_step {
