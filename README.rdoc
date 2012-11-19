@@ -1,0 +1,13 @@
+== styleus
+
+styleus is a support tool for creating a fast
+and simple component based html style guide.
+
+Basically it is a set of helper functions and
+initial stylings providing easy generation
+of component lists with a simple anchor link menu.
+
+The representations are done via partials
+for each component with a _plain and a _sample file.
+
+This project uses MIT-LICENSE.
