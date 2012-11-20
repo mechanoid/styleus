@@ -1,50 +1,45 @@
 module StyleusHelper
-  def styleus(components = [])
-    menu_entries      = []
-    component_listing = components.map do |options|
-      styleus_component(options[:headline], options[:partial_path], menu_entries)
+  def styleus(comp_list = [])
+    component_list  =  ComponentList.from_hashes(comp_list)
+
+    component_listing = component_list.components.map do |component|
+      wrap_component component
     end
 
-    styleus_list(menu_entries).concat(component_listing.join.html_safe)
+    component_menu(component_list).concat(component_listing.join.html_safe)
   end
 
-  def styleus_component(headline, partial_path, menu = nil)
-    # create a "unique" id for anchor tags
-    #TODO make it really unique ^^
-    component_id = "#{headline}#{rand(999)}".underscore
-
+  def wrap_component(component)
     # add component to linked list menu
-    menu.push({ id: component_id, headline: headline }) if menu
-
-    _styleus_article_wrap(headline: headline, anchor_id: component_id) do
-      styleus_partials(partial_path)
+    #menu.push({ id: component.id, headline: component.headline }) if menu
+    _styleus_article_wrap(headline: component.headline, anchor_id: component.id) do
+      styleus_partials(component.partial_path)
     end
   end
 
   def styleus_partials(partial_path)
     sample_template = _styleus_representation_wrap(class: '__boxed') do
-        render partial: "#{partial_path}_sample"
-      end
+      render partial: "#{partial_path}_sample"
+    end
 
-      plain_template = _coderay_highlight_wrap("#{partial_path}.html.erb") do
-        render partial: "#{partial_path}_plain"
-      end
+    plain_template = _coderay_highlight_wrap("#{partial_path}.html.erb") do
+      render partial: "#{partial_path}_plain"
+    end
 
-      sample_template.concat(plain_template)
+    sample_template.concat(plain_template)
   end
 
-  def styleus_list(menu_entries)
+  def component_menu(component_list)
     content_tag 'nav' do
       content_tag 'ul' do
-        link_list = menu_entries.map do |entry|
-          content_tag 'li' do
-            link_to entry[:headline], anchor: entry[:id]
-          end
+        content_tag_for(:li, component_list.components) do |component|
+          link_to component.headline, anchor: component.id
         end
-        link_list.join.html_safe
       end
     end
   end
+
+
 
   def _styleus_article_wrap(options = { }, &block)
     captured_block = capture(&block)
