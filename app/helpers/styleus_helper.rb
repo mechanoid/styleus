@@ -1,6 +1,6 @@
 module StyleusHelper
   def styleus(comp_list = [])
-    component_list  =  ComponentList.from_hashes(comp_list)
+    component_list = ComponentList.from_hashes(comp_list)
 
     component_listing = component_list.components.map do |component|
       wrap_component component
@@ -40,7 +40,6 @@ module StyleusHelper
   end
 
 
-
   def _styleus_article_wrap(options = { }, &block)
     captured_block = capture(&block)
 
@@ -55,9 +54,18 @@ module StyleusHelper
 
   def _styleus_representation_wrap(options = { }, &block)
     captured_block = capture(&block)
-    classes        = '__sg_component'.concat(" #{options[:class].to_s}")
-    content_tag('section', class: classes) do
+
+    content_for :component_context do
       captured_block.to_s.html_safe
+    end
+
+    component_in_context = render 'layouts/styleus_context' do
+      'fdsfds'
+    end
+
+    classes = '__sg_component'.concat(" #{options[:class].to_s}")
+    content_tag('section', class: classes) do
+      component_in_context
     end
   end
 
