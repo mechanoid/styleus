@@ -10,4 +10,9 @@ of component lists with a simple anchor link menu.
 The representations are done via partials
 for each component with a _plain and a _sample file.
 
+=== Conventions
+* classes used by styleus are prefixed with __styleus
+* classes are used only for css styles in styleus context
+* javascripts are applied via data-* attributes
+
 This project uses MIT-LICENSE.
