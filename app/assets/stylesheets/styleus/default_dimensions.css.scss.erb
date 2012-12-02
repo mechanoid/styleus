@@ -1,0 +1,10 @@
+<% if Rails.configuration.styleus.use_default_dimensions %>
+/* The maximum screen width should give all components
+   displayed in this guide enought space to unfold. */
+$maximum_screen_width: <%= Rails.configuration.styleus.maximum_screen_size || 1680 %>px;
+
+/* limiting the page width to a configurable maximum */
+.__styleus_wrapper { width: $maximum_screen_width; }
+<% end %>
+
+

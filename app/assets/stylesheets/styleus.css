@@ -10,5 +10,6 @@
  *
  * # Requiring a basic theme for the styleus layout frame
  * # TODO (fh): think about moving this "decision" to the app.
+ *= require styleus/default_dimensions
  *= require styleus/themes/base
  */
