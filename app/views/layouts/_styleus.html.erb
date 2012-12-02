@@ -7,6 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= yield :components %>
+<!-- class __styleus is the styleus context class,
+ providing a minimal css setting. -->
+<section class="__styleus_wrapper">
+  <%= yield :components %>
+</section>
 </body>
 </html>
