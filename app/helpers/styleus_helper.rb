@@ -25,7 +25,7 @@ module StyleusHelper
     end
 
     plain_template = _coderay_highlight_wrap("#{partial_path}.html.erb") do
-      render partial: "#{partial_path}_plain"
+      render partial: "#{partial_path}"
     end
 
     sample_template.concat(plain_template)
