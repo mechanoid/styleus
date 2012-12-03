@@ -6,7 +6,9 @@ module StyleusHelper
       wrap_component component
     end
 
-    component_menu(component_list).concat(component_listing.join.html_safe)
+    #component_menu(component_list).concat(
+    component_listing.join.html_safe
+    #)
   end
 
   def wrap_component(component)
@@ -39,7 +41,6 @@ module StyleusHelper
     end
   end
 
-
   def _styleus_article_wrap(options = { }, &block)
     captured_block = capture(&block)
 
@@ -55,23 +56,18 @@ module StyleusHelper
   def _styleus_representation_wrap(options = { }, &block)
     captured_block = capture(&block)
 
-    content_for :component_context do
-      captured_block.to_s.html_safe
-    end
-
-    component_in_context = render 'layouts/styleus_context' do
-      'fdsfds'
-    end
-
     classes = '__sg_component'.concat(" #{options[:class].to_s}")
     content_tag('section', class: classes) do
-      component_in_context
+      render layout: 'layouts/styleus_context' do
+        captured_block.to_s.html_safe
+      end
     end
   end
 
   def _coderay_highlight_wrap(note = nil, &block)
-    captured_block = capture(&block)
-    code_block     = CodeRay.scan(captured_block.to_s, :html)
+    captured_block   = capture(&block)
+    code_block       = CodeRay.scan(captured_block.to_s, :html)
+
     note_tag       = note ? content_tag('p', note, class: '__code_note') : ''
 
     highlighted_code = "#{note_tag}#{code_block.div(:css => :class)}"

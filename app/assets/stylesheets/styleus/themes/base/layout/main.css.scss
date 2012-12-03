@@ -1,13 +1,15 @@
-@import url(http://fonts.googleapis.com/css?family=Oleo+Script:700);
-
-@import "compass";
-@import "compass/reset";
-@import "compass/css3";
-
-body {
-  background: #e8e6df;
-}
+body { background: $main_background; }
 
 .__styleus_wrapper {
+  @include box-sizing(border-box);
+  padding: 3em 1em 1em 4em;
 
+  header {
+    h1 {
+      font-size: 5em;
+      font-family: "Oleo Script";
+      margin-bottom: 0.2em;
+      color: #332717;
+    }
+  }
 }
