@@ -1,3 +1,6 @@
+# Provides a basic model, with attribute and
+# naming capabilities.
+# TODO: replace with ActiveModel::Model or something like that
 class Base
   extend ActiveModel::Naming
   include ActiveModel::AttributeMethods
@@ -8,7 +11,7 @@ class Base
   end
 
   def id
-    @id ||= rand(99999999)
+    nil
   end
 
   # as implemented as in ActiveRecord

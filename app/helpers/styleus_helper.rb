@@ -1,15 +1,14 @@
 module StyleusHelper
   def styleus(comp_list = [])
-    component_list = ComponentList.from_hashes(comp_list)
+    @components = ViewComponent.from_hashes(comp_list)
 
-    component_listing = component_list.components.map do |component|
+    @component_list = @components.map do |component|
       wrap_component component
     end
 
-    #component_menu(component_list).concat(
-    component_listing.join.html_safe
-    #)
+    component_menu.concat(_joined_component_list)
   end
+
 
   def wrap_component(component)
     # add component to linked list menu
@@ -31,10 +30,11 @@ module StyleusHelper
     sample_template.concat(plain_template)
   end
 
-  def component_menu(component_list)
+  def component_menu
+    return if @components.empty?
     content_tag 'nav' do
       content_tag 'ul' do
-        content_tag_for(:li, component_list.components) do |component|
+        content_tag_for(:li, @components) do |component|
           link_to component.headline, anchor: component.id
         end
       end
@@ -72,5 +72,9 @@ module StyleusHelper
 
     highlighted_code = "#{note_tag}#{code_block.div(:css => :class)}"
     highlighted_code.html_safe
+  end
+
+  def _joined_component_list
+    @component_list.join.html_safe
   end
 end
