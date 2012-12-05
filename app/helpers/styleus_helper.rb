@@ -11,8 +11,6 @@ module StyleusHelper
 
 
   def wrap_component(component)
-    # add component to linked list menu
-    #menu.push({ id: component.id, headline: component.headline }) if menu
     _styleus_article_wrap(headline: component.headline, anchor_id: component.id) do
       styleus_partials(component.partial_path)
     end
