@@ -7,8 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="__sg_wrapper">
-  <%= yield %>
-</div>
+<!-- class __styleus is the styleus context class,
+ providing a minimal css setting. -->
+<section class="__styleus_wrapper">
+  <header>
+    <h1>Component Guide</h1>
+  </header>
+
+  <%= yield :components %>
+</section>
 </body>
 </html>

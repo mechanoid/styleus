@@ -1,8 +1,8 @@
 .CodeRay {
-  background-color: #232323;
-  border: 1px solid black;
+
+  background-color: #2B2B2B;
   font-family: 'Courier New', 'Terminal', monospace;
-  color: #E6E0DB;
+  color: #fff;
   padding: 3px 5px;
   overflow: auto;
   font-size: 14px;
@@ -12,7 +12,7 @@
     padding: 0px;
   }
 
-  .tag { color: #E7BE69; }
-  .string { color: #A5C261; }
+  .tag, .attribute-name { color: #E8BF6A; }
+  .string, .content { color: #A5C261; }
   .comment { color: #BC9458; }
 }

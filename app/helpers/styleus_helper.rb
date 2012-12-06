@@ -1,47 +1,40 @@
 module StyleusHelper
-  def styleus(components = [])
-    menu_entries      = []
-    component_listing = components.map do |options|
-      styleus_component(options[:headline], options[:partial_path], menu_entries)
+  def styleus(comp_list = [])
+    @components = Styleus::ViewComponent.from_hashes(comp_list)
+
+    @component_list = @components.map do |component|
+      wrap_component component
     end
 
-    styleus_list(menu_entries).concat(component_listing.join.html_safe)
+    component_menu.concat(_joined_component_list)
   end
 
-  def styleus_component(headline, partial_path, menu = nil)
-    # create a "unique" id for anchor tags
-    #TODO make it really unique ^^
-    component_id = "#{headline}#{rand(999)}".underscore
 
-    # add component to linked list menu
-    menu.push({ id: component_id, headline: headline }) if menu
-
-    _styleus_article_wrap(headline: headline, anchor_id: component_id) do
-      styleus_partials(partial_path)
+  def wrap_component(component)
+    _styleus_article_wrap(headline: component.headline, anchor_id: component.id) do
+      styleus_partials(component.partial_path)
     end
   end
 
   def styleus_partials(partial_path)
     sample_template = _styleus_representation_wrap(class: '__boxed') do
-        render partial: "#{partial_path}_sample"
-      end
+      render partial: "#{partial_path}_sample"
+    end
 
-      plain_template = _coderay_highlight_wrap("#{partial_path}.html.erb") do
-        render partial: "#{partial_path}_plain"
-      end
+    plain_template = _coderay_highlight_wrap("#{partial_path}.html.erb") do
+      render partial: "#{partial_path}"
+    end
 
-      sample_template.concat(plain_template)
+    sample_template.concat(plain_template)
   end
 
-  def styleus_list(menu_entries)
+  def component_menu
+    return if @components.empty?
     content_tag 'nav' do
       content_tag 'ul' do
-        link_list = menu_entries.map do |entry|
-          content_tag 'li' do
-            link_to entry[:headline], anchor: entry[:id]
-          end
+        content_tag_for(:li, @components) do |component|
+          link_to component.headline, anchor: component.id
         end
-        link_list.join.html_safe
       end
     end
   end
@@ -60,18 +53,26 @@ module StyleusHelper
 
   def _styleus_representation_wrap(options = { }, &block)
     captured_block = capture(&block)
-    classes        = '__sg_component'.concat(" #{options[:class].to_s}")
+
+    classes = '__sg_component'.concat(" #{options[:class].to_s}")
     content_tag('section', class: classes) do
-      captured_block.to_s.html_safe
+      render layout: 'layouts/styleus_context' do
+        captured_block.to_s.html_safe
+      end
     end
   end
 
   def _coderay_highlight_wrap(note = nil, &block)
-    captured_block = capture(&block)
-    code_block     = CodeRay.scan(captured_block.to_s, :html)
+    captured_block   = capture(&block)
+    code_block       = CodeRay.scan(captured_block.to_s, :html)
+
     note_tag       = note ? content_tag('p', note, class: '__code_note') : ''
 
     highlighted_code = "#{note_tag}#{code_block.div(:css => :class)}"
     highlighted_code.html_safe
+  end
+
+  def _joined_component_list
+    @component_list.join.html_safe
   end
 end

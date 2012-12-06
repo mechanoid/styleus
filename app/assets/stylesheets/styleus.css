@@ -1,4 +1,15 @@
 /*
- *= require coderay
- *= require styleus/main
+ * # Including styles responsible for a clean representation
+ * # of foreign app styles.
+ *= require styleus/core
+ *
+ * # Styleus code highlighting is based on coderay so we
+ * # include a basic coderay styling, adjusted for our
+ * # base style.
+ *= require styleus/themes/base/coderay
+ *
+ * # Requiring a basic theme for the styleus layout frame
+ * # TODO (fh): think about moving this "decision" to the app.
+ *= require styleus/default_dimensions
+ *= require styleus/themes/base
  */

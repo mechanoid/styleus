@@ -1,0 +1,56 @@
+@mixin component {
+  overflow: hidden;
+  position: relative;
+  top: 0; left: 0;
+}
+
+@mixin ambient-font {
+  font-family: 'Didact Gothic';
+  color: $soft-text;
+}
+
+@mixin ambient-headline {
+  @include ambient-font;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+@mixin article-side-padding {
+  @include box-sizing(border-box);
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.__sg_article {
+  @include border-radius(3px);
+  @include box-shadow(0 2px 3px 0 #cdcdcd);
+  @include component;
+  background: $content_background;
+  margin-bottom: 1em;
+  min-height: 3em;
+  padding-top: 1em;
+
+  > h3 {
+    @include ambient-headline;
+    @include article-side-padding;
+    margin-bottom: 0.5em;
+    text-align: right;
+  }
+
+  .__sg_component, .CodeRay, .__code_note {
+    @include article-side-padding;
+  }
+
+  .__code_note {
+    @include ambient-font;
+    text-align: right;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+  }
+
+  .CodeRay {
+    @include border-radius(0 0 3px 3px);
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+}
