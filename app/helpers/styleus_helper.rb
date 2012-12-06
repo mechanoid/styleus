@@ -1,6 +1,6 @@
 module StyleusHelper
   def styleus(comp_list = [])
-    @components = ViewComponent.from_hashes(comp_list)
+    @components = Styleus::ViewComponent.from_hashes(comp_list)
 
     @component_list = @components.map do |component|
       wrap_component component

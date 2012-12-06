@@ -1,5 +1,4 @@
 Rails.application.config.before_configuration do |app|
-
   # initialize styleus configuration
   app.config.styleus = Styleus::Engine::Configuration.new unless app.config.respond_to? :styleus
 
