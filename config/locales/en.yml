@@ -1,4 +1,9 @@
 en:
+  links:
+    titles:
+      html: HTML Repräsentation
+      helper: Rails Helper
+      expand_all: Alle anzeigen
   icons:
     html: Ì
     helper: b
