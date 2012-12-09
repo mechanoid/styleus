@@ -12,7 +12,7 @@
 
   h3 {
     @include default-index-alignment;
-    font-family: 'Calluna-Regular';
+    font-family: 'Source Sans Pro';
     color: #bb9b1d;
     font-size: 1.2em;
     letter-spacing: 0.12em;
@@ -30,7 +30,7 @@
       margin-bottom: 0.3em;
 
       a:link, a:visited, a:hover, a:active {
-        font-family: 'Calluna-Regular';
+        font-family: 'Source Sans Pro';
         letter-spacing: 0.12em;
         color: #ccc;
         text-decoration: none;
