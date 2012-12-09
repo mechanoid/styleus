@@ -11,9 +11,10 @@
 
   h3 {
     @include default-index-alignment;
-    font-family: 'Didact Gothic';
+    font-family: 'Calluna-Regular';
     color: #bb9b1d;
-    font-size: 1em;
+    font-size: 1.2em;
+    letter-spacing: 0.12em;
     font-weight: thin;
     text-transform: capitalize;
     margin-bottom: 0.5em;
@@ -28,10 +29,10 @@
       margin-bottom: 0.3em;
 
       a:link, a:visited, a:hover, a:active {
-        font-family: 'Didact Gothic';
+        font-family: 'Calluna-Regular';
+        letter-spacing: 0.12em;
         color: #ccc;
         text-decoration: none;
-        font-size: 0.9em;
         position: relative;
         top: 0; left: 0;
 
@@ -39,10 +40,10 @@
           content: '';
           display: block;
           width: 9999px;
-          height: 0.9em;
+          height: 0.8em;
           position: absolute;
           right: -9999px - 5;
-          top: 0.1em;
+          top: 0;
           border-bottom: 1px dashed #bb9b1d;
         }
       }

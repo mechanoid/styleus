@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Oleo+Script:700);
-@import url(http://fonts.googleapis.com/css?family=Didact+Gothic);
 
 @import "compass";
 @import "compass/reset";
@@ -7,13 +6,16 @@
 @import "compass/css3/user-interface";
 
 @import "base/fonts/raphael";
+@import "base/fonts/calluna";
 
 @import 'base/settings/colors';
-@import 'base/layout/main';
 
 @import 'base/behaviors/text';
 @import 'base/behaviors/positioning';
 @import 'base/behaviors/component';
+
+@import 'base/layout/main';
+
 
 @import 'base/components/article';
 @import 'base/components/option_bar';

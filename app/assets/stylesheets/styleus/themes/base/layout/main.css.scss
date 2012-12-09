@@ -12,6 +12,7 @@ body { background: $main_background asset-url('styleus/themes/base/noise.png', i
 
 .__styleus_wrapper {
   @include box-sizing(border-box);
+  @include component;
 
   header {
     @include default-side-padding;
