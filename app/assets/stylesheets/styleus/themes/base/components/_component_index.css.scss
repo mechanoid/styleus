@@ -23,9 +23,10 @@
   }
 
   ul {
-    @include default-index-alignment;
+    @include component;
 
     li {
+      @include default-index-alignment;
       text-align: right;
       margin-bottom: 0.3em;
 
@@ -44,7 +45,7 @@
           height: 0.8em;
           position: absolute;
           right: -9999px - 5;
-          top: 0;
+          top: 0.15em;
           border-bottom: 1px dashed #bb9b1d;
         }
       }
