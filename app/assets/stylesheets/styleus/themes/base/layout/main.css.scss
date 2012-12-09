@@ -17,7 +17,7 @@ body { background: $main_background asset-url('styleus/themes/base/noise.png', i
   header {
     @include default-side-padding;
     padding-top: 2em;
-    padding-bottom: 2em;
+    padding-bottom: 0em;
 
     h1 {
       font-size: 5em;
