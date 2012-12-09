@@ -17,8 +17,10 @@
     padding: 0.5em;
   }
 
-  .tag, .attribute-name { color: #1c02ff; }
+  .tag, .attribute-name, .keyword { color: #1c02ff; }
   .string, .content { color: #26B31A; }
+  .code { color: #000; }
+  .symbol { color: #f00; }
   .comment { color: #0066FF; }
 
   .line-numbers {

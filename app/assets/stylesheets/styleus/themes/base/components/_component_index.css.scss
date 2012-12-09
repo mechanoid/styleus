@@ -4,10 +4,11 @@
 }
 
 .__component_index {
+  @include single-box-shadow(#111, 0, -0.5em, 5em, 1em, inset);
   @include default-side-padding;
+  background: $hard_contrast_area asset-url('styleus/themes/base/noise_dark.png', image);
   padding-top: 2em;
   padding-bottom: 2em;
-  background: $hard_contrast_area asset-url('styleus/themes/base/noise_dark.png', image);
 
   h3 {
     @include default-index-alignment;

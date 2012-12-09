@@ -19,6 +19,7 @@
     @include article-side-padding;
     margin-bottom: 0.5em;
     text-align: right;
+    color: #ccc;
   }
 
   .__sg_component, .CodeRay, .__code_note {
@@ -32,12 +33,12 @@
 
   .__code_note {
     @include background(linear-gradient(bottom, #b5b5b5, #e4e4e4));
-    @include border-radius(6px 6px 0 0);
+    @include border-radius(6px 0 0 0);
     @include ambient-font;
     border-top: 1px solid #cacaca;
     border-bottom: 1px solid #999;
     text-align: center;
-    margin-top: 0.5em;
+    //margin-top: 0.5em;
     line-height: 1.5em;
   }
 
@@ -48,6 +49,6 @@
 
 // hide highligthed code for default, if js is enabled
 .js {
-  [data-subject=html-representation] { display: none; }
-  [data-subject=html-representation].enabled { display: block; }
+  [data-subject*=representation] { display: none; }
+  [data-subject*=representation].enabled { display: block; }
 }
