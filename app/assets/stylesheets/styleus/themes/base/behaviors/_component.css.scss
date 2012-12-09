@@ -1,0 +1,11 @@
+@mixin component {
+// easier width determination for components
+  @include box-sizing(border-box);
+// each component should be the positioning
+// relative for included elements
+  @include positioned(relative);
+// each component should be side-effect free,
+// so included elements should not leave the
+// component context.
+  overflow: hidden;
+}

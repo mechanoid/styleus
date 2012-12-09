@@ -1,0 +1,10 @@
+// default positioning for
+@mixin positioned($type) {
+  position: $type;
+  top: 0; left: 0;
+}
+
+@mixin floating($direction) {
+  @include component;
+  float: $direction;
+}

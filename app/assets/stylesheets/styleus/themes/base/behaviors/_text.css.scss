@@ -1,0 +1,10 @@
+@mixin ambient-font {
+  font-family: 'Didact Gothic';
+  color: $soft-text;
+}
+
+@mixin ambient-headline {
+  @include ambient-font;
+  font-size: 1.2em;
+  font-weight: bold;
+}

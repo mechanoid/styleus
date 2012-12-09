@@ -1,0 +1,30 @@
+// icon base option bar for an article,
+// to provide some icon based links, for
+// each article.
+nav.option_bar {
+  @include component;
+  margin-bottom: 0.5em;
+
+  ul {
+    li {
+      @include component;
+      @include floating(right);
+      width: 35px;
+      height: 33px;
+      padding-top: 3px;
+      text-align: center;
+      background: transparent asset-url('styleus/themes/base/option_bar_bulp.png', image) no-repeat;
+      // last element in line, cause it is floated right
+      &:first-of-type {
+        @include border-radius(0 16px 16px 0);
+        width: 33px;
+      }
+
+      &:last-of-type {
+        @include border-radius(16px 0 0 16px);
+        width: 33px;
+        background-position: -2px;
+      }
+    }
+  }
+}
