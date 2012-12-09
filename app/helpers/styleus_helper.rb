@@ -80,7 +80,7 @@ module StyleusHelper
   end
 
   def _helper_representation(&block)
-    _coderay_highlight_wrap(nil, type: :ruby, &block)
+    _coderay_highlight_wrap('Rails Helper', type: :ruby, &block)
   end
 
   def _coderay_highlight_wrap(note = nil, options = { type: :html }, &block)
