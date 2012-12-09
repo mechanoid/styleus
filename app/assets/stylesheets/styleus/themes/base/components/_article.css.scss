@@ -8,6 +8,7 @@
   @include border-radius(3px);
   @include box-shadow(0 2px 3px 0 #cdcdcd);
   @include component;
+  @include default-side-margin;
   background: $content_background;
   margin-bottom: 1em;
   min-height: 3em;

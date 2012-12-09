@@ -1,0 +1,51 @@
+@mixin default-index-alignment {
+  max-width: 25%;
+  text-align: right;
+}
+
+.__component_index {
+  @include default-side-padding;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background: $hard_contrast_area asset-url('styleus/themes/base/noise_dark.png', image);
+
+  h3 {
+    @include default-index-alignment;
+    font-family: 'Didact Gothic';
+    color: #bb9b1d;
+    font-size: 1em;
+    font-weight: thin;
+    text-transform: capitalize;
+    margin-bottom: 0.5em;
+    border-bottom: 1px dashed #bb9b1d;
+  }
+
+  ul {
+    @include default-index-alignment;
+
+    li {
+      text-align: right;
+      margin-bottom: 0.3em;
+
+      a:link, a:visited, a:hover, a:active {
+        font-family: 'Didact Gothic';
+        color: #ccc;
+        text-decoration: none;
+        font-size: 0.9em;
+        position: relative;
+        top: 0; left: 0;
+
+        &:hover:after {
+          content: '';
+          display: block;
+          width: 9999px;
+          height: 0.9em;
+          position: absolute;
+          right: -9999px - 5;
+          top: 0.1em;
+          border-bottom: 1px dashed #bb9b1d;
+        }
+      }
+    }
+  }
+}

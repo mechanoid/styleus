@@ -6,7 +6,7 @@ module StyleusHelper
       wrap_component component
     end
 
-    component_index('test').concat(_joined_component_list)
+    component_index(components_category).concat(_joined_component_list)
   end
 
   def wrap_component(component)
@@ -38,14 +38,15 @@ module StyleusHelper
 
   def component_index(headline)
     return if @components.empty?
-    menu = content_tag 'nav' do
-      content_tag 'ul' do
+    content_tag 'nav', class: "__component_index" do
+      menu_entries = content_tag 'ul' do
         content_tag_for(:li, @components) do |component|
           link_to component.headline, anchor: component.id
         end
       end
+      content_tag('h3', headline).concat menu_entries
     end
-    content_tag('h3', headline).concat menu
+
   end
 
   def _styleus_article_wrap(options = { }, &block)

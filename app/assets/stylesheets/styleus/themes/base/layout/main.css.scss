@@ -1,15 +1,28 @@
-body { background: $main_background; }
+body { background: $main_background asset-url('styleus/themes/base/noise.png', image); }
+
+@mixin default-side-padding {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+@mixin default-side-margin {
+  margin-left: 2em;
+  margin-right: 2em;
+}
 
 .__styleus_wrapper {
   @include box-sizing(border-box);
-  padding: 3em 1em 1em 4em;
 
   header {
+    @include default-side-padding;
+    padding-top: 2em;
+    padding-bottom: 2em;
+
     h1 {
       font-size: 5em;
       font-family: "Oleo Script";
       margin-bottom: 0.2em;
-      color: #332717;
+      color: $hard_contrast_font;
     }
   }
 }
