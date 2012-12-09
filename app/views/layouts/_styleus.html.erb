@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
 <head>
+  <meta charset="utf-8">
   <title>ComponentGuide</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= javascript_include_tag "styleus_prerender" %>
 </head>
 <body>
 <!-- class __styleus is the styleus context class,
@@ -16,5 +17,8 @@
 
   <%= yield :components %>
 </section>
+
+<%= javascript_include_tag "application" %>
+
 </body>
 </html>

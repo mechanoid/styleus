@@ -6,7 +6,7 @@ module Styleus
     # so it has to be a uid.
     # TODO: make sure the uid-ness :)
     def id
-      headline.underscore
+      headline.underscore.gsub(/ /, '_')
     end
 
     class << self

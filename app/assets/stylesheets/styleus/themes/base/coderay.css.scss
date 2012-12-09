@@ -1,18 +1,46 @@
-.CodeRay {
+@import "compass/css3/user-interface";
 
-  background-color: #2B2B2B;
-  font-family: 'Courier New', 'Terminal', monospace;
+.CodeRay {
+  background-color: #fff;
+  font-family: 'Monaco', 'Courier New', 'Terminal', monospace;
   color: #fff;
-  padding: 3px 5px;
   overflow: auto;
   font-size: 14px;
   line-height: 1.1em;
+
   pre {
     margin: 0px;
     padding: 0px;
   }
 
-  .tag, .attribute-name { color: #E8BF6A; }
-  .string, .content { color: #A5C261; }
-  .comment { color: #BC9458; }
+  tr td {
+    padding: 0.5em;
+  }
+
+  .tag, .attribute-name { color: #1c02ff; }
+  .string, .content { color: #26B31A; }
+  .comment { color: #0066FF; }
+
+  .line-numbers {
+    @include user-select(none);
+    background-color: #e3e3e3;
+    text-align: right;
+    color: #888;
+    display: block;
+    width: 2em;
+    padding-right: 0.3em;
+  }
+
+  .line-numbers a {
+    color: #888;
+    text-decoration: none;
+  }
+
+  //.line-numbers a:target { color: blue; }
+  //.line-numbers .highlighted { color: red; }
+  //.line-numbers .highlighted a { color: red; }
+  //span.line-numbers { padding: 0px 4px; }
+  //.line { display: block; float: left; width: 100%; }
+  //.code { width: 100%; }
+
 }

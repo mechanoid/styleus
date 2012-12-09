@@ -1,7 +1,7 @@
 // icon base option bar for an article,
 // to provide some icon based links, for
 // each article.
-nav.option_bar {
+nav.__option_bar {
   @include component;
   margin-bottom: 0.5em;
 

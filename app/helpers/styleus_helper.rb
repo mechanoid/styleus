@@ -6,15 +6,14 @@ module StyleusHelper
       wrap_component component
     end
 
-    component_index.concat(_joined_component_list)
+    component_index('test').concat(_joined_component_list)
   end
 
-
   def wrap_component(component)
-    option_bar(component) +
-            _styleus_article_wrap(headline: component.headline, anchor_id: component.id) do
-              styleus_partials(component.partial_path)
-            end
+    article = _styleus_article_wrap(headline: component.headline, id: component.id) do
+      styleus_partials(component.partial_path)
+    end
+    option_bar(component).concat article
   end
 
   def styleus_partials(partial_path)
@@ -30,30 +29,29 @@ module StyleusHelper
   end
 
   def option_bar(component)
-    content_tag 'nav', class: 'option_bar' do
+    content_tag 'nav', class: '__option_bar' do
       content_tag 'ul' do
-        content_tag('li') { link_to t('icons.html'), component_path(component), class: 'icon', data: { toggle: "##{component.id}[data-subject=html-representation]" } }
-        .concat content_tag('li') { link_to t('icons.helper'), component_path(component), class: 'icon', data: { toggle: 'rails-helper' } }
-        .concat content_tag('li') { link_to t('icons.expand_all'), component_path(component), class: 'icon', data: { toggle: 'rails-helper' } }
+        content_tag('li') { link_to t('icons.html'), component_path(component), class: 'icon', data: { toggle: "##{component.id} [data-subject=html-representation]" } }.concat content_tag('li') { link_to t('icons.helper'), component_path(component), class: 'icon', data: { toggle: 'rails-helper' } }.concat content_tag('li') { link_to t('icons.expand_all'), component_path(component), class: 'icon', data: { toggle: 'rails-helper' } }
       end
     end
   end
 
-  def component_index
+  def component_index(headline)
     return if @components.empty?
-    content_tag 'nav' do
+    menu = content_tag 'nav' do
       content_tag 'ul' do
         content_tag_for(:li, @components) do |component|
           link_to component.headline, anchor: component.id
         end
       end
     end
+    content_tag('h3', headline).concat menu
   end
 
   def _styleus_article_wrap(options = { }, &block)
     captured_block = capture(&block)
 
-    content_tag('article', class: '__sg_article', id: options[:anchor_id]) do
+    content_tag('article', class: '__sg_article', id: options[:id]) do
       content  = ''
       headline = options[:headline]
       content.concat(content_tag('h3', headline)) if headline
@@ -79,11 +77,14 @@ module StyleusHelper
 
     note_tag = note ? content_tag('p', note, class: '__code_note') : ''
 
-    highlighted_code = "#{note_tag}#{code_block.div(:css => :class)}"
-    highlighted_code.html_safe
+    highlighted_code = "#{note_tag}#{code_block.div(:css => :class, line_numbers: :table)}"
+    content_tag('div', data: { subject: 'html-representation' }) do
+      highlighted_code.html_safe
+    end
   end
 
   def _joined_component_list
     @component_list.join.html_safe
   end
+
 end

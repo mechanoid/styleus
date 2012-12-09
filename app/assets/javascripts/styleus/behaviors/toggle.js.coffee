@@ -7,6 +7,6 @@ namespace 'styleus.toggle', (exports) ->
     $root.on 'click', "[data-#{config.toggleSelector}]", (event) ->
       event.preventDefault()
       link =  $(event.target)
-      target = link.data(config.toggleSelector)
-      $(target).show()
+      target = $root.find(link.data(config.toggleSelector))
+      target.toggleClass('enabled') if target
       false
