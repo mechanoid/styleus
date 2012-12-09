@@ -12,6 +12,7 @@
  providing a minimal css setting. -->
 <section class="__styleus_wrapper">
   <header>
+    <%= link_to raw('<span class="icon"><</span> Components'), components_path, class: "back" if components_category? %>
     <h1>Component Guide</h1>
   </header>
 

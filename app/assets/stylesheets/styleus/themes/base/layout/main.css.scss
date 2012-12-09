@@ -14,7 +14,7 @@ body { background: $main_background asset-url('styleus/themes/base/noise.png', i
   @include box-sizing(border-box);
   @include component;
 
-  header {
+  > header {
     @include default-side-padding;
     padding-top: 2em;
     padding-bottom: 0em;
@@ -24,6 +24,24 @@ body { background: $main_background asset-url('styleus/themes/base/noise.png', i
       font-family: "Oleo Script";
       margin-bottom: 0.2em;
       color: $hard_contrast_font;
+    }
+
+    a:link, a:visited, a:hover, a:active {
+      @include floating(right);
+      float: right;
+      text-decoration: none;
+      font-size: 2em;
+      font-family: 'Calluna-Regular';
+      text-transform: none;
+      font-weight: bold;
+      opacity: 0.4;
+      color: #111;
+
+      .icon {
+        position: relative;
+        top: 0.2em; left: 0.1em;
+        opacity: 0.3;
+      }
     }
   }
 }

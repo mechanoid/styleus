@@ -1,7 +1,7 @@
 class ComponentsController < ApplicationController
   layout 'components'
 
-  helper_method :components_category
+  helper_method :components_category, :components_category?
 
   def index
     render_for_components
