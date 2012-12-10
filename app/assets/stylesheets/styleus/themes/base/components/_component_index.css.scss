@@ -12,7 +12,7 @@
 
   h3 {
     @include default-index-alignment;
-    font-family: 'Calluna-Regular';
+    font-family: 'Source Sans Pro';
     color: #bb9b1d;
     font-size: 1.2em;
     letter-spacing: 0.12em;
@@ -23,14 +23,15 @@
   }
 
   ul {
-    @include default-index-alignment;
+    @include component;
 
     li {
+      @include default-index-alignment;
       text-align: right;
       margin-bottom: 0.3em;
 
       a:link, a:visited, a:hover, a:active {
-        font-family: 'Calluna-Regular';
+        font-family: 'Source Sans Pro';
         letter-spacing: 0.12em;
         color: #ccc;
         text-decoration: none;
@@ -44,7 +45,7 @@
           height: 0.8em;
           position: absolute;
           right: -9999px - 5;
-          top: 0;
+          top: 0.15em;
           border-bottom: 1px dashed #bb9b1d;
         }
       }
