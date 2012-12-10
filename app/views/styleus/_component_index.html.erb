@@ -1,0 +1,10 @@
+<% unless components.empty? %>
+  <nav class="__component_index">
+    <%= content_tag 'h3', headline if headline %>
+    <ul>
+      <%= content_tag_for(:li, components) do |component| %>
+        <%= link_to component.headline, anchor: component.id %>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>
