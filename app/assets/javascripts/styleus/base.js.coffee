@@ -1,3 +1,9 @@
 jQuery($(document).ready ->
-  styleus.toggle.install()
+  install = ->
+    styleus.toggle.install()
+    styleus.sampleContent.install()
+
+  $(document).on 'dom:changed', install
+
+  install()
 )

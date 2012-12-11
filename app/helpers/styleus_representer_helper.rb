@@ -16,13 +16,12 @@ module StyleusRepresenterHelper
   end
 
   def _code_note(note)
-    note ? _render_styleus('code_note', object: note) : safe_empty
+    note ? _render_styleus('code_note', object: note) : _safe_empty
   end
 
   def _code(code, type)
     _render_styleus 'code', object: code, locals: { type: type }
   end
-
 
   def _render_styleus(styleus_partial, options = { }, &block)
     render_type    = block_given? ? 'layout' : 'partial'

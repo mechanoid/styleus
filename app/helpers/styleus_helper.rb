@@ -1,14 +1,8 @@
 require 'styleus_representer_helper'
 
 module StyleusHelper
-  def styleus(comp_list = [])
-    @components = Styleus::ViewComponent.from_hashes(comp_list)
-
-    @component_list = @components.map do |component|
-      wrap_component component
-    end
-
-    component_index(components_category).concat(_joined_component_list)
+  def build_view_components(comp_list)
+    @components ||= Styleus::ViewComponent.from_hashes(comp_list)
   end
 
   def wrap_component(component)
@@ -19,21 +13,25 @@ module StyleusHelper
   end
 
   def styleus_partials(partial_path, options = { })
-    sample_template = _styleus_component_wrap(class: '__boxed') { render partial: "#{partial_path}_sample" }
+    #sample_template = _styleus_component_wrap(class: '__boxed') { render partial: "#{partial_path}_sample" }
+    #
+    #plain_template = _html_representation("#{partial_path}.html.erb") { render partial: "#{partial_path}" }
+    #
+    #helper_template = _helper_representation { render partial: "#{partial_path}_helper" } if options[:helper]
 
-    plain_template = _html_representation("#{partial_path}.html.erb") { render partial: "#{partial_path}" }
+    #sample_template.concat(plain_template).concat(helper_template || _safe_empty)
 
-    helper_template = _helper_representation { render partial: "#{partial_path}_helper" } if options[:helper]
 
-    sample_template.concat(plain_template).concat(helper_template || _safe_empty)
+    # execute application partial without responding it directly,
+    # so only the given content_for methods will help.
+    render partial: "#{partial_path}"
+
+    # returning concatenating responder partial, which consists of content_for blocks only.
+    render(layout: 'styleus/styleus_partials') {  ''.html_safe }
   end
 
   def option_bar(component)
     _option_bar(component)
-  end
-
-  def component_index(headline)
-    _component_index(headline, @components)
   end
 
   def _styleus_article_wrap(options = { }, &block)
@@ -64,10 +62,6 @@ module StyleusHelper
     code_with_note   = _code_note(note).concat highlighted_code
 
     _code(code_with_note, type)
-  end
-
-  def _joined_component_list
-    @component_list.join.html_safe
   end
 
   def _highlight(code, type)
