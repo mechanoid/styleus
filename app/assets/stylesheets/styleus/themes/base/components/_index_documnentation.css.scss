@@ -1,5 +1,6 @@
 .__index_documentation {
   @include default-side-margin;
+  @include floating-text-font;
   margin-top: 2em;
   padding-left: 0.5em;
 }
