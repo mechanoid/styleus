@@ -1,6 +1,6 @@
 <% if content_for? :documentation %>
   <section class="__documentation">
-    <%= content_for :documentation %>
+    <%= content_for(:documentation).html_safe %>
   </section>
 <% end %>
 
