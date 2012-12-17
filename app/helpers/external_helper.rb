@@ -2,7 +2,7 @@ require 'styleus_helper'
 
 module ExternalHelper
   def index_documentation(&block)
-    content_tag 'section', class: '__index_documentation', &block
+    content_tag('section', class: '__index_documentation', &block).html_safe
   end
 
   def documentation(&block)
