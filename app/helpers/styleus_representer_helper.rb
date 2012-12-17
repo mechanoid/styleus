@@ -7,8 +7,8 @@ module StyleusRepresenterHelper
     _render_styleus('component_index', locals: { headline: headline, components: components })
   end
 
-  def _article(options, &block)
-    _render_styleus('article', locals: { headline: options[:headline], id: options[:id] }, &block)
+  def _article(component, &block)
+    _render_styleus('article', locals: { headline: component.headline, id: component.id, component: component }, &block)
   end
 
   def _component(classes, &block)

@@ -10,7 +10,6 @@ namespace 'styleus.sampleContent', (exports) ->
 
     render: => @view
 
-
   class Diagonal extends Shape
     constructor: (@width, @height, @direction) ->
       super()
@@ -67,7 +66,6 @@ namespace 'styleus.sampleContent', (exports) ->
       @boxHeight = @view.data('height') ? @view.innerHeight()
       @view.css('width', @boxWidth)
       @view.css('height', @boxHeight)
-
 
     addDiagonals: =>
       diagonals = [new Diagonal(@boxWidth, @boxHeight), new Diagonal(@boxWidth, @boxHeight, 'inverted')]

@@ -2,8 +2,11 @@
   <nav class="__component_index">
     <h3>Components</h3>
     <ul>
-      <li><a href="/components/containers">Container Components</a></li>
-      <li><a href="/components/forms">Form Components</a></li>
+      <!--<li><a href="/components/containers">Container Components</a></li>-->
+      <!--<li><a href="/components/forms">Form Components</a></li>-->
+      <% Styleus::Component.spaces.each do |space| %>
+        <li><%= link_to space.to_s.camelcase, send(:"#{space}_path") %></li>
+      <% end %>
     </ul>
   </nav>
 </div>

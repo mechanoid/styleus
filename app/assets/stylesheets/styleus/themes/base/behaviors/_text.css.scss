@@ -1,5 +1,9 @@
-@mixin ambient-font {
+@mixin floating-text-font {
   font-family: 'Source Sans Pro';
+}
+
+@mixin ambient-font {
+  @include floating-text-font;
   color: $soft-text;
 }
 

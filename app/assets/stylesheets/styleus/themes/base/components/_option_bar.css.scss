@@ -3,9 +3,9 @@
 // each article.
 nav.__option_bar {
   @include component;
-  @include default-side-margin;
-  margin-top: 1em;
-  margin-bottom: 0.2em;
+  position: absolute;
+  top: -2.25em;
+  right: 0;
 
   ul {
     li {
