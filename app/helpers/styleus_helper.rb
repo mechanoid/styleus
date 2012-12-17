@@ -1,42 +1,60 @@
 require 'styleus_representer_helper'
 
 module StyleusHelper
-  def build_view_components(comp_list)
+
+  # this heart of gold function renders the app component partials
+  # and enables the configured content_for blocks for the target
+  # partial called styleus_partials.
+  def _styleus_partials(component, options = { })
+    # execute application partial without responding it directly,
+    # so only the given content_for methods will help.
+    render partial: "#{component.partial_path}"
+
+    # returning concatenating responder partial, which consists of content_for blocks only.
+    render(layout: 'styleus/styleus_partials', locals: { component: component }) { }
+  end
+
+  # To use the render layout: '...' method multiple times
+  # for the several components, including the same content_for
+  # blocks each time, we have to clean up them before registering
+  # the next blocks.
+  #
+  # So this function wraps the content_for function with
+  # a prepended clearing for the specific content_for attribute,
+  # so that earlier defined content_for areas are not
+  # rendered again.
+  def _cleared_content_for(content_name, content)
+    # clear content_for calls for this name
+    @view_flow.set(content_name, '')
+
+    # set new content_for for this name
+    content_for content_name, content
+  end
+
+
+  # converts the list of component hashes configured in the
+  # app to a list of ViewComponent instances.
+  def _build_view_components(comp_list)
     @components ||= Styleus::ViewComponent.from_hashes(comp_list)
   end
 
-  def wrap_component(component)
-    article = _styleus_article_wrap(headline: component.headline, id: component.id) do
-      styleus_partials(component.partial_path, helper: component.helper?)
+  # wraps a component in an article and combines it with
+  # a depending optionbar, that enables the user to show
+  # and hide the different partials.
+  def _wrap_component(component)
+    _styleus_article_wrap(component) do
+      _styleus_partials(component, helper: component.helper?)
     end
-    option_bar(component).concat article
   end
 
-  def styleus_partials(partial_path, options = { })
-    #sample_template = _styleus_component_wrap(class: '__boxed') { render partial: "#{partial_path}_sample" }
-    #
-    #plain_template = _html_representation("#{partial_path}.html.erb") { render partial: "#{partial_path}" }
-    #
-    #helper_template = _helper_representation { render partial: "#{partial_path}_helper" } if options[:helper]
-
-    #sample_template.concat(plain_template).concat(helper_template || _safe_empty)
-
-
-    # execute application partial without responding it directly,
-    # so only the given content_for methods will help.
-    render partial: "#{partial_path}"
-
-    # returning concatenating responder partial, which consists of content_for blocks only.
-    render(layout: 'styleus/styleus_partials') {  ''.html_safe }
-  end
-
-  def option_bar(component)
+  def _option_bar(component)
     _option_bar(component)
   end
 
-  def _styleus_article_wrap(options = { }, &block)
+  # renders an article attribute wrap for a component
+  def _styleus_article_wrap(component, &block)
     captured_block = capture(&block)
-    _article(options) { captured_block }
+    _article(component) { captured_block }
   end
 
   def _styleus_component_wrap(options = { }, &block)
@@ -45,9 +63,12 @@ module StyleusHelper
     _component(classes) { captured_block }
   end
 
+  def _styleus_documentation_wrap(options = { }, &block)
+    captured_block = capture(&block)
+  end
 
-  def _html_representation(note = nil, &block)
-    _coderay_highlight_wrap(note, &block)
+  def _html_representation(&block)
+    _coderay_highlight_wrap('HTML Snippet', &block)
   end
 
   def _helper_representation(&block)
