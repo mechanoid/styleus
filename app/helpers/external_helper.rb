@@ -10,7 +10,7 @@ module ExternalHelper
   end
 
   def display(&block)
-    _cleared_content_for :representation, _styleus_component_wrap(&block)
+    _cleared_content_for :representation, capture(&block)
   end
 
   def html(&block)

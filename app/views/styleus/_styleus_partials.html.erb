@@ -6,8 +6,7 @@
 
 <section class="__code_partials">
   <%= _option_bar(component) %>
-
-  <%= content_for(:representation).html_safe %>
+  <%= _styleus_component_wrap(partial_path: component.partial_path) { content_for(:representation).html_safe } %>
   <%= content_for(:html).html_safe %>
   <%= content_for(:helper).html_safe %>
 </section>
