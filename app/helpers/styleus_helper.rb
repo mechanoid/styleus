@@ -1,6 +1,50 @@
 require 'styleus_representer_helper'
 
 module StyleusHelper
+  def _application_context(&block)
+    captured_block = capture(&block)
+
+    layout_name = 'styleus_context'
+    file_name   = "_#{layout_name}.html.erb"
+
+    if _layout_exists?(file_name)
+      render(layout: File.join('layouts', layout_name)) { captured_block }
+    else
+      captured_block
+    end
+  end
+
+  def _component_context(file_path, &block)
+    captured_block = capture(&block)
+
+    view_path = _folder_path(file_path)
+
+    partial_name = 'component_context'
+    partial_path = File.join view_path, 'component_context'
+    file_path   = File.join view_path, "_#{partial_name}.html.erb"
+
+    if _partial_exists?(file_path)
+      render(layout: partial_path) { captured_block }
+    else
+      captured_block
+    end
+  end
+
+  def _folder_path(path)
+    path = path.split(File::SEPARATOR)
+    path.pop
+    path.join(File::SEPARATOR)
+  end
+
+  def _partial_exists?(view_path)
+    file_path = Rails.root.join('app', 'views', view_path)
+    File.exists? file_path
+  end
+
+  def _layout_exists?(file_name)
+    file_path = Rails.root.join('app', 'views', 'layouts', file_name)
+    File.exists? file_path
+  end
 
   # this heart of gold function renders the app component partials
   # and enables the configured content_for blocks for the target
@@ -8,7 +52,7 @@ module StyleusHelper
   def _styleus_partials(component, options = { })
     # execute application partial without responding it directly,
     # so only the given content_for methods will help.
-    render partial: "#{component.partial_path}"
+    render partial: "#{component.partial_path}", locals: { component: component }
 
     # returning concatenating responder partial, which consists of content_for blocks only.
     render(layout: 'styleus/styleus_partials', locals: { component: component }) { }
@@ -60,9 +104,10 @@ module StyleusHelper
   def _styleus_component_wrap(options = { }, &block)
     captured_block = capture(&block)
     classes        = %W{__sg_component #{options[:class]}}.join(' ')
-    _component(classes) { captured_block }
+    _component(classes, options[:partial_path]) { captured_block }
   end
 
+  # TODO: what does this method do?
   def _styleus_documentation_wrap(options = { }, &block)
     captured_block = capture(&block)
   end

@@ -1,5 +1,7 @@
 <section class="<%= classes %>">
-  <%= render layout: 'layouts/styleus_context' do %>
-    <%= yield %>
+  <%= _application_context do %>
+    <%= _component_context(partial_path) do %>
+      <%= yield %>
+    <% end %>
   <% end %>
 </section>

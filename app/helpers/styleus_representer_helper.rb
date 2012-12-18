@@ -11,8 +11,8 @@ module StyleusRepresenterHelper
     _render_styleus('article', locals: { headline: component.headline, id: component.id, component: component }, &block)
   end
 
-  def _component(classes, &block)
-    _render_styleus('component', locals: { classes: classes }, &block)
+  def _component(classes, partial_path, &block)
+    _render_styleus('component', locals: { classes: classes, partial_path: partial_path }, &block)
   end
 
   def _code_note(note)
