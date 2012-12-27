@@ -88,7 +88,7 @@ module StyleusHelper
   # and hide the different partials.
   def _wrap_component(component)
     _styleus_article_wrap(component) do
-      _styleus_partials(component, helper: component.helper?)
+      _styleus_partials(component)
     end
   end
 

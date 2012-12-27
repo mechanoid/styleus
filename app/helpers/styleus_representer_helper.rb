@@ -1,6 +1,6 @@
 module StyleusRepresenterHelper
-  def _option_bar(component)
-    _render_styleus('option_bar', locals: { component: component })
+  def _option_bar(component, helper)
+    _render_styleus('option_bar', locals: { component: component, helper: helper })
   end
 
   def _component_index(headline, components)
