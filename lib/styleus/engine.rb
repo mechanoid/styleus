@@ -8,7 +8,6 @@ module Styleus
       app.config.assets.precompile += ['styleus.css']
     end
 
-
     class Configuration < OpenStruct
       def to_s
         instance_variable_get(:@table).to_s

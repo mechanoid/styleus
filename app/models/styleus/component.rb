@@ -1,13 +1,13 @@
 module Styleus
   class Component
-    class_attribute :sections, :components
+    class_attribute :_sections, :components, :_section_name
 
     class << self
       def components(*new_components)
         return registered_components if new_components.empty?
 
         registered_components.push(*new_components).uniq!
-        registered_components.inspect
+        registered_components
       end
 
       def registered_components
@@ -19,7 +19,7 @@ module Styleus
       end
 
       def sections
-        @sections ||= { }
+        self._sections ||= { }
       end
 
       def section_key
@@ -27,7 +27,7 @@ module Styleus
       end
 
       def section_name
-        @section_name ||= to_underscore
+        self._section_name ||= to_underscore
       end
 
       def to_underscore

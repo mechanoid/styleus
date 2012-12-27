@@ -2,8 +2,8 @@
   <nav class="__component_index">
     <h3>Components</h3>
     <ul>
-      <% Styleus::Component.spaces.each do |space| %>
-        <li><%= link_to space.to_s.camelcase, send(:"#{space}_path") %></li>
+      <% Styleus::Component.sections.each do |section, components| %>
+        <li><%= link_to section.to_s.camelcase, send(:"#{section.to_s.pluralize}_path") %></li>
       <% end %>
     </ul>
   </nav>

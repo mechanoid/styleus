@@ -23,6 +23,16 @@ module Styleus
         hashes.each { |comp_hash| components << new(comp_hash) }
         components
       end
+
+      def from_names(section, names)
+        components.clear
+        names.each do |name|
+          components << new(
+                  headline: name.to_s.humanize,
+                  partial_path: File.join('components', section, "#{name}"))
+        end
+        components
+      end
     end
   end
 end
