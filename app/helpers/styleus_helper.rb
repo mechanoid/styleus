@@ -1,6 +1,10 @@
 require 'styleus_representer_helper'
 
 module StyleusHelper
+  def _section
+    params[:components]
+  end
+
   def _application_context(&block)
     captured_block = capture(&block)
 
@@ -21,7 +25,7 @@ module StyleusHelper
 
     partial_name = 'component_context'
     partial_path = File.join view_path, 'component_context'
-    file_path   = File.join view_path, "_#{partial_name}.html.erb"
+    file_path    = File.join view_path, "_#{partial_name}.html.erb"
 
     if _partial_exists?(file_path)
       render(layout: partial_path) { captured_block }
@@ -50,36 +54,33 @@ module StyleusHelper
   # and enables the configured content_for blocks for the target
   # partial called styleus_partials.
   def _styleus_partials(component, options = { })
+    _clear_content_for_registrations(:documentation, :representation, :html, :helper)
     # execute application partial without responding it directly,
     # so only the given content_for methods will help.
     render partial: "#{component.partial_path}", locals: { component: component }
 
     # returning concatenating responder partial, which consists of content_for blocks only.
-    render(layout: 'styleus/styleus_partials', locals: { component: component }) { }
+    result = render(layout: 'styleus/styleus_partials', locals: { component: component }) { }
+    flush_output_buffer
+    _clear_content_for_registrations(:documentation, :representation, :html, :helper)
+    result
   end
 
-  # To use the render layout: '...' method multiple times
-  # for the several components, including the same content_for
-  # blocks each time, we have to clean up them before registering
-  # the next blocks.
-  #
-  # So this function wraps the content_for function with
-  # a prepended clearing for the specific content_for attribute,
-  # so that earlier defined content_for areas are not
-  # rendered again.
-  def _cleared_content_for(content_name, content)
+  # clean up content_for blocks, so same content_for names can be used several times
+  def _clear_content_for_registrations(*content_names)
     # clear content_for calls for this name
-    @view_flow.set(content_name, '')
-
-    # set new content_for for this name
-    content_for content_name, content
+    content_names.each { |content_name| @view_flow.set(content_name, '') }
   end
 
 
   # converts the list of component hashes configured in the
   # app to a list of ViewComponent instances.
-  def _build_view_components(comp_list)
-    @components ||= Styleus::ViewComponent.from_hashes(comp_list)
+  def _build_view_components
+    @components ||= Styleus::ViewComponent.from_names(_section, _section_class.components)
+  end
+
+  def _section_class
+    _section.camelcase.singularize.constantize
   end
 
   # wraps a component in an article and combines it with
@@ -87,7 +88,7 @@ module StyleusHelper
   # and hide the different partials.
   def _wrap_component(component)
     _styleus_article_wrap(component) do
-      _styleus_partials(component, helper: component.helper?)
+      _styleus_partials(component)
     end
   end
 

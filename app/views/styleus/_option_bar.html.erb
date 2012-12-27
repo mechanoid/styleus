@@ -3,7 +3,7 @@
     <li><%= link_to t('icons.html'), component_path(component),
                     title: t('links.titles.html'), class: 'icon', data: { toggle: "##{component.id} [data-subject=html-representation]" } %></li>
 
-    <% if component.helper? %>
+    <% if helper %>
       <li><%= link_to t('icons.helper'), component_path(component),
                       title: t('links.titles.helper'), class: 'icon', data: { toggle: "##{component.id} [data-subject=ruby-representation]" } %></li>
     <% end %>
