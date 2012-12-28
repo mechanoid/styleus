@@ -1,0 +1,26 @@
+.__documentation {
+  @include floating-text-font;
+  @include text-content-padding;
+  margin-bottom: 0.5em;
+
+  p {
+    line-height: 1.5;
+
+    em {
+      font-weight: bold;
+      color: #333;
+    }
+  }
+}
+
+.__index.__documentation {
+  @include default-side-margin;
+  @include floating-text-font;
+  margin-top: 2em;
+
+  h2 {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+}

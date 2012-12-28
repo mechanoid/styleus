@@ -26,12 +26,7 @@
     }
   }
 
-  .__documentation {
-    @include floating-text-font;
-    @include text-content-padding;
-    margin-bottom: 0.5em;
-    width: 80%;
-  }
+  .__documentation { width: 90%; }
 
   .__code_partials {
     @include border-radius(3px);
