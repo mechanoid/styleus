@@ -9,6 +9,10 @@ module Styleus
       headline.underscore.gsub(/ /, '_')
     end
 
+    def to_s
+      headline.humanize.pluralize
+    end
+
     class << self
       def components
         @components ||= []

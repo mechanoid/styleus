@@ -3,7 +3,7 @@
     <h3>Components</h3>
     <ul>
       <% Styleus::Component.sections.each do |section, components| %>
-        <li><%= link_to section.to_s.camelcase, send(:"#{section.to_s.pluralize}_path") %></li>
+        <li><%= link_to section.to_s.humanize.pluralize, send(:"#{section.to_s.pluralize}_path") %></li>
       <% end %>
     </ul>
   </nav>
