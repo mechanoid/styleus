@@ -1,22 +1,25 @@
 // TODO: has to be discovered via js, later.
 $diagonals_default_size: 100%;
 $diagonals_multiplier: 2;
+$border_color: #dddddd;
 
 .styleus_sample.box {
-  //@include component;
+  @include border-radius(4px);
+  @include component;
   display: block;
-  border: 1px solid black;
+  border: 1px solid $border_color;
   height: 100px;
   margin: 3px;
   width: 100px;
+  background: #eeeeee;
+
 
   & > .diagonal {
     display: block;
     height: 1px;
     position: relative;
-    //left: -($diagonals_default_size / $diagonals_multiplier);
     left: 0;
     top: $diagonals_default_size / $diagonals_multiplier;
-    background: #000;
+    background: $border_color;
   }
 }
