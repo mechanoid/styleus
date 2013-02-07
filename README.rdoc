@@ -1,5 +1,7 @@
 == styleus
 
+Further development will happen at [https://github.com/innoq/styleus]
+
 styleus is a support tool for creating a fast
 and simple component based html style guide.
 
