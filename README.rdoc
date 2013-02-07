@@ -1,6 +1,6 @@
 == styleus
 
-Further development will happen at [https://github.com/innoq/styleus]
+NOTICE: Further development and maintenance will happen at innoQ projectspace >> https://github.com/innoq/styleus
 
 styleus is a support tool for creating a fast
 and simple component based html style guide.
